@@ -15,10 +15,8 @@ void	PhoneBook::add(int num)
 	int res;
 
 	res = contacts[num % CONTACT_SIZE].init();
-	if (res){
-		std::cout << "Error!" << std::endl;
+	if (res)
 		return ;
-	}
 	std::cout << "Successfully registered contact details!" << std::endl;
 }
 
@@ -27,6 +25,8 @@ void	PhoneBook::search()
 	printListItems();
 	std::cout << "Enter the index of entry ." << std::endl;
 	std::getline(std::cin, index);
+	if (std::cin.eof())
+		return ;
 	if (!(index >= "0" && index <= "9")){
 		std::cout << "Please enter a valid number" << std::endl;
 		return ;

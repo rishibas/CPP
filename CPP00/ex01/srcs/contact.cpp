@@ -29,7 +29,8 @@ int	Contact::init()
 
 	while (42){
 		std::cout << "Enter your phone number ." << std::endl;
-		if (std::getline(std::cin, phoneNumber) && !phoneNumber.empty())
+		if (std::getline(std::cin, phoneNumber) && !phoneNumber.empty() &&
+				phoneNumber >= "0" && phoneNumber <= "9")
 			break;
 		if (std::cin.eof())
 			return 1;
