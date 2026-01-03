@@ -1,22 +1,21 @@
 #include <iostream>
-#include <string.h>
+#include <string>
 #include <fstream>
+#include <sstream>
 
-bool	replace(std::ifstream& inFile, std::ofstream& outFile,
+bool	replace(std::string &content, std::ofstream& outFile,
 							std::string s1, std::string s2){
-	if (!inFile.is_open() || !outFile.is_open()){
-		std::cerr << "Could not open the file" << std::endl;
-			return false;
+	if (s1 == ""){
+		std::cerr << "The search string must not be empty." << std::endl;
+		return false;
 	}
-	std::string line;
-	while (std::getline(inFile, line, '\n')){
-		std::string::size_type s1Pos = line.find(s1);
-		if (s1Pos != std::string::npos)
-			outFile << line.substr(0, s1Pos) << s2 << 
-					line.substr(s1Pos + s1.size(), line.size()) << "\n";
-		else
-			outFile << line << "\n";
+	std::string::size_type pos = 0;
+	while ((pos = content.find(s1, pos)) != std::string::npos){
+		content.erase(pos, s1.size());
+		content.insert(pos, s2);
+		pos += s2.size();
 	}
+	outFile << content;
 	return true;
 }
 
@@ -26,9 +25,22 @@ int main(int argc, char **argv){
 		return 1;
 	}
 	std::ifstream inFile(argv[1]);
+	if (!inFile.is_open()){
+		std::cerr << "Could not open the file: " << std::string(argv[1]) << std::endl;
+		return 1;
+	}
 	std::string outFileName = std::string(argv[1]) + ".replace";
 	std::ofstream outFile(outFileName.c_str());
-	if (!replace(inFile, outFile, std::string(argv[2]), std::string(argv[3])))
+	if (!outFile.is_open()){
+		std::cerr << "Could not open the output file !" << std::endl;
+		inFile.close();
 		return 1;
+	}
+	std::stringstream iss;
+	iss << inFile.rdbuf();
+	std::string content = iss.str();
+	if (!replace(content, outFile, std::string(argv[2]), std::string(argv[3])))
+		return 1;
+	inFile.close();
 	outFile.close();
 }
