@@ -10,5 +10,7 @@ void	HumanB::setWeapon(Weapon *club){
 }
 
 void	HumanB::attack(){
+	if (!weapon)
+		return ;
 	std::cout << name << " attacks with their " << weapon->getType() << std::endl;
 }
