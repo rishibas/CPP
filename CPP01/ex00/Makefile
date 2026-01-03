@@ -2,6 +2,8 @@ TARGET = zombie
 
 SRCS = main.cpp \
 		Zombie.cpp \
+		randomChump.cpp \
+		newZombie.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
