@@ -1,6 +1,8 @@
-TARGET = main
+TARGET = zombie
 
 SRCS = main.cpp \
+		Zombie.cpp \
+		zombieHorde.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -18,10 +20,10 @@ $(TARGET): $(OBJS)
 
 clean:
 	rm -rf $(OBJS)
-	
+
 fclean: clean
 	rm -rf $(TARGET)
 
 re: fclean all
 
-.PHONEY: all fclean clean re
+.PHONY: all fclean clean re

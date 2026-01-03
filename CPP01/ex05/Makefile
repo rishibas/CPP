@@ -1,6 +1,7 @@
-TARGET = main
+TARGET = harl
 
 SRCS = main.cpp \
+		Harl.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 

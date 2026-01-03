@@ -1,8 +1,8 @@
 TARGET = main
 
-SRCS = main.cpp \
+SRC = main.cpp \
 
-OBJS = $(SRCS:.cpp=.o)
+OBJS = $(SRC:.cpp=.o)
 
 CXX = c++
 
@@ -18,10 +18,11 @@ $(TARGET): $(OBJS)
 
 clean:
 	rm -rf $(OBJS)
-	
+
 fclean: clean
 	rm -rf $(TARGET)
 
-re: fclean all
+re:
+	fclean all
 
-.PHONEY: all fclean clean re
+.PHONEY: fclean clean all re

@@ -21,6 +21,7 @@ $(TARGET): $(OBJS)
 
 clean:
 	rm -rf $(OBJS)
+	
 fclean: clean
 	rm -rf $(TARGET)
 
