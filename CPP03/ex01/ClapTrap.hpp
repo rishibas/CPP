@@ -4,9 +4,9 @@
 # include <iostream>
 
 class ClapTrap{
-	private:
-		static const int MAX_HP = 10;
-		static const int MAX_EP = 10;
+	protected: //継承先クラスにアクセス権限を与える。
+		static const int MAX_HP = 100;
+		static const int MAX_EP = 100;
 		std::string		name;
 		unsigned int	HitPoints;
 		unsigned int	EnergyPoints;
@@ -15,12 +15,13 @@ class ClapTrap{
 	public:
 		ClapTrap();
 		ClapTrap(std::string name);
+		ClapTrap(std::string name, unsigned int HitPoints, unsigned int EnergyPoints, unsigned int AttackDamage);
 		ClapTrap(const ClapTrap &other);
 		ClapTrap&	operator=(const ClapTrap &other);
-		~ClapTrap();
+		virtual ~ClapTrap();
 
 		//Task Requirements
-		void	attack(const std::string& target);
+		virtual void	attack(const std::string& target);
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
 
@@ -29,7 +30,7 @@ class ClapTrap{
 		unsigned int getHitPoints() const;
 		unsigned int getEnergyPoints() const;
 		unsigned int getAttackDamage() const;
+		void		Info() const;
 };
-
 
 #endif
