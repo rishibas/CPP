@@ -1,27 +1,20 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed() : FixedPointNum(0) {
-	std::cout << "Default constructor called" << std::endl;
-}
+Fixed::Fixed() : FixedPointNum(0) {}
 
 Fixed::Fixed(const int num) {
-	std::cout << "Int constructor called" << std::endl;
 	FixedPointNum = num << FractionalBits;
-} 
+}
 
 Fixed::Fixed(const float num){
-	std::cout << "Float constructor called" << std::endl;
 	FixedPointNum = (int)((num * 256) + 0.5);
 }
 
 Fixed::Fixed(const Fixed &other){
-	std::cout << "Copy constructor called" << std::endl;
 	*this = other;
-	
 }
 
 int	Fixed::getRawBits(void) const{
-	std::cout << "getRawBits member function called" << std::endl;
 	return this->FixedPointNum;
 }
 
@@ -30,16 +23,13 @@ void	Fixed::setRawBits(int const raw){
 }
 
 Fixed& Fixed::operator=(const Fixed &other){
-	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &other){
 		this->FixedPointNum = other.FixedPointNum;
 	}
 	return (*this);
 }
 
-Fixed::~Fixed(){
-std::cout << "Destructor called" << std::endl;
-}
+Fixed::~Fixed(){}
 
 int	Fixed::toInt(void) const{
 	return FixedPointNum >> FractionalBits;
@@ -95,7 +85,7 @@ Fixed	Fixed::operator-(const Fixed &other) const {
 Fixed	Fixed::operator*(const Fixed &other) const {
 	Fixed res;
 
-	long long num = (long long)this->FixedPointNum * (long long)other.getRawBits();
+	int num = this->FixedPointNum * other.getRawBits();
 	res.setRawBits((int)(num / 256));
 	return res;
 }
@@ -103,8 +93,54 @@ Fixed	Fixed::operator*(const Fixed &other) const {
 Fixed	Fixed::operator/(const Fixed &other) const {
 	Fixed res;
 
-	long long num = ((long long)this->FixedPointNum * 256);
-	long long resRaw = num / other.getRawBits(); 
+	int num = this->FixedPointNum * 256;
+	int resRaw = num / other.getRawBits(); 
 	res.setRawBits((int)resRaw);
 	return res;
+}
+
+Fixed	&Fixed::operator++(void){
+	this->setRawBits(this->getRawBits() + 1);
+	return *this;
+}
+
+Fixed	&Fixed::operator--(void){
+	this->setRawBits(this->getRawBits() - 1);
+	return *this;
+}
+
+Fixed	Fixed::operator++(int){
+	Fixed pre(*this); //Copy constructor
+	this->operator++();
+	return pre;
+}
+
+Fixed	Fixed::operator--(int){
+	Fixed pre(*this); //Copy Constructor
+	this->operator--();
+	return pre;
+}
+
+Fixed&	Fixed::min(Fixed &a, Fixed &b){
+	if (a > b)
+		return b;
+	return a;
+}
+
+const	Fixed&	Fixed::min(const Fixed &a, const Fixed &b){
+	if (a > b)
+		return b;
+	return a;
+}
+
+Fixed&	Fixed::max(Fixed &a, Fixed &b){
+	if (a > b)
+		return a;
+	return b;
+}
+
+const	Fixed&	Fixed::max(const Fixed &a, const Fixed &b){
+	if (a > b)
+		return a;
+	return b;
 }
