@@ -17,6 +17,7 @@ Fixed::Fixed(const float num){
 Fixed::Fixed(const Fixed &other){
 	std::cout << "Copy constructor called" << std::endl;
 	*this = other;
+
 }
 
 Fixed& Fixed::operator=(const Fixed &other){
@@ -42,4 +43,9 @@ float Fixed::toFloat(void) const{
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed){
 	out << fixed.toFloat();
 	return out;
+}
+
+
+std::ostream &operator>(const Fixed &fixed, const Fixed &fixed1){
+	if (fixed.)
 }
