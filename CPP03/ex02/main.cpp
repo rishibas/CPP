@@ -49,6 +49,7 @@ int main() {
         // 意図的にHPを0にするなどのテストも有効
         frag.takeDamage(100);
         frag.attack("Target"); // 行動不能のはず
+        frag.beRepaired(100); // 行動不能のはず
         frag.highFivesGuys();      // 死亡状態でもガードできるか？（実装次第ですが、一般的にはチェックが必要）
         frag.Info();
     }

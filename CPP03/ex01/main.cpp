@@ -49,6 +49,7 @@ int main() {
         // 意図的にHPを0にするなどのテストも有効
         scav.takeDamage(100);
         scav.attack("Target"); // 行動不能のはず
+        scav.beRepaired(100); // 行動不能のはず
         scav.guardGate();      // 死亡状態でもガードできるか？（実装次第ですが、一般的にはチェックが必要）
         scav.Info();
     }

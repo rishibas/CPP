@@ -36,14 +36,14 @@ void	ScavTrap::guardGate(){
 void	ScavTrap::attack(const std::string& target){
 	if (HitPoints <= 0){
 		HitPoints = 0;
-		std::cout << "ClapTrap " << name << "は行動不能。" << std::endl;
+		std::cout << "ScavTrap " << name << "は行動不能。" << std::endl;
 		return ;
 	}
 	if (EnergyPoints <= 0){
 		EnergyPoints = 0;
-		std::cout << "ClapTrap " << name << "は攻撃することができない!" << std::endl;
+		std::cout << "ScavTrap " << name << "は攻撃することができない!" << std::endl;
 		return ;	
 	}
-	std::cout << "ClapTrap " << name << "が" << target << "を攻撃し、" << AttackDamage << "ポイントのダメージを与えた！ (エネルギーポイント-1)" << std::endl;
+	std::cout << "ScavTrap " << name << "が" << target << "を攻撃し、" << AttackDamage << "ポイントのダメージを与えた！ (エネルギーポイント-1)" << std::endl;
 	EnergyPoints--;
 }
