@@ -4,19 +4,19 @@
 # include<iostream>
 # include<string>
 
+
 class Animal{
 	protected:
 		std::string type;
 
 	public:
 	Animal();
-	~Animal();
-	Animal(std::string type);
+	virtual ~Animal();
 	Animal(const Animal &other);
 	Animal&	operator=(const Animal &other);
 
-	std::string	getType();
-	void		makeSound();
+	std::string		getType() const ;
+	virtual void	makeSound() const ;
 };
 
 #endif
